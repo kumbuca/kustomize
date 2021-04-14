@@ -46,6 +46,11 @@ func MakeSecret(
 			Value: yaml.NewStringRNode(t)}); err != nil {
 		return nil, err
 	}
+	if args.Immutable {
+		if _, err := rn.Pipe(yaml.SetField("immutable", yaml.NewScalarRNode("true"))); err != nil {
+			return nil, err
+		}
+	}
 	m, err := makeValidatedDataMap(ldr, args.Name, args.KvPairSources)
 	if err != nil {
 		return nil, err

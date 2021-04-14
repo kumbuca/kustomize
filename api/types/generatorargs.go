@@ -24,4 +24,7 @@ type GeneratorArgs struct {
 
 	// Local overrides to global generatorOptions field.
 	Options *GeneratorOptions `json:"options,omitempty" yaml:"options,omitempty"`
+
+	// Immutable configures whether the generated ConfigMap or Secret should be marked as immutable.
+	Immutable bool `json:"immutable,omitempty" yaml:"immutable,omitempty"`
 }

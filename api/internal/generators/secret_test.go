@@ -194,6 +194,29 @@ data:
 `,
 			},
 		},
+		"construct immutable secret": {
+			args: types.SecretArgs{
+				GeneratorArgs: types.GeneratorArgs{
+					Name:      "immutableSecret",
+					Immutable: true,
+					KvPairSources: types.KvPairSources{
+						LiteralSources: []string{"a=x"},
+					},
+					Options: &types.GeneratorOptions{},
+				},
+			},
+			exp: expected{
+				out: `apiVersion: v1
+kind: Secret
+metadata:
+  name: immutableSecret
+type: Opaque
+immutable: true
+data:
+  a: eA==
+`,
+			},
+		},
 	}
 	fSys := filesys.MakeFsInMemory()
 	fSys.WriteFile(
